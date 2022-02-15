@@ -339,6 +339,461 @@ $a %= $b
 $a = $a % b
 
 Kode : Operator Penugasan Aritmatika
+$total = 0;
+
+$fruit = 5000;
+$chicken = 10000;
+$orangeJuice = 5000;
+
+
+$total += $fruit;
+$total += $chicken;
+$total += $orangeJuice;
+
+var_dump($total);
+
+Operator Perbandingan
+Operator perbandingan, seperti namanya, digunakan untuk membandingan dua buat value
+Hasil dari operator perbandingan adalah boolean, true jika perbandingannya benar, false jika perbandingannya salah
+
+Operator Perbandingan (1)
+ Operator
+Nama
+Keterangan
+$a == $b
+Sama dengan
+true jika $a sama dengan $b setelah dilakukan konversi tipe data
+$a === $b
+Identik
+true jika $a sama dengan $b dan memiliki tipe data yang sama
+$a != $b
+Tidak sama dengan
+true jika $a tidak sama dengan $b setelah dilakukan konversi tipe data
+$a <> $b
+Tidak sama dengan
+true jika $a tidak sama dengan $b setelah dilakukan konversi tipe data
+ $a !== $b
+Tidak identik
+true jika $a tidak sama dengan $b atau tidak sama tipe data
+$a < $b
+Kurang dari
+true jika $a kurang dari $b
+$a <= $b
+Kurang dari atau sama dengan
+true jika $a kurang dari atau sama dengan $b
+$a > $b
+Lebih dari 
+true jika $a lebih dari $b
+$a >= $b
+Lebih dari sama dengan
+true jika $a lebih dari atau sama dengan $b
+
+Kode : Operator Perbandingan
+var_dump("10" == 10);
+var_dump("10" === 10);
+
+var_dump(10 < 9);
+var_dump(9 >= 9);
+
+Operator Logika
+Operator logika adalah operator untuk membandingkan dua nilai boolean
+Hasil dari operator logika adalah boolean lagi
+
+Operator Logika
+ Operator
+Nama
+Hasil
+$a && $b
+And
+true jika $a dan $b keduanya true
+$a and $b
+And
+true jika $a dan $b keduanya true
+$a || $b
+Or
+true jika $a dan $b salah satu atau keduanya true
+$a or $b
+Or
+true jika $a dan $b salah satu atau keduanya true 
+! $a
+Not
+true jika $a bernilai false
+$a xor $b
+Xor
+true jika $a dan $b salah satu true, tapi tidak keduanya
+
+Kode : Operator Logika
+var_dump(true && true);
+var_dump(true && false);
+
+var_dump(true || false);
+var_dump(true || true);
+
+var_dump(true xor false);
+var_dump(true xor true);
+
+var_dump(!true);
+var_dump(!false);
+
+Increment dan Decrement
+PHP mendukung gaya bahasa pemrograman C untuk menaikkan dan menurunkan data number sejumlah 1 angka
+Ini bisa mempersingkat kita ketika ingin menaikkan data
+
+Operator Increment dan Decrement
+ Contoh
+Name
+Efek
+$a++
+Post increment
+Kembalikan $a lalu naikkan 1 angka
+++$a
+Pre increment
+Naikkan $a satu angka, lalu kembalikan $a
+$a--
+Post decrement
+Kembalikan $a lalu turunkan 1 angka
+--$a
+Pre decrement
+Turunkan $a satu angka, lalu kembalikan $a
+
+Kode : Operator Increment dan Decrement
+$a = 10;
+
+$b = ++$a;
+
+var_dump($a);
+var_dump($b);
+
+Operator Array
+Di PHP, Array memiliki operator khusus
+Mungkin terlihat mirip dengan operator-operator sebelumnya, tapi cara kerjanya sedikit berbeda
+
+Operator Array
+ Contoh
+Nama
+Keterangan
+$a + $b
+Union
+Menggabungkan array $a dan $b
+$a == $b
+Equality
+true jika $a dan $b memiliki key-value sama
+$a === $b
+Identity
+true jika $a dan $b memiliki key-value sama dan posisi sama
+$a != $b
+Inequality
+true jika $a dan $b tidak sama
+$a <> $b
+Inequality
+true jika $a dan $b tidak sama
+$a !== $b
+Nonidentity
+true jika $a dan $b tidak identik
+
+Kode : Operator Array (1)
+$first = [
+    "first_name" => "Eko"
+];
+
+$last = [
+    "first_name" => "Budi",
+    "last_name" => "Khannedy"
+];
+
+$full = $first + $last;
+var_dump($full);
+
+$a = [
+    "first_name" => "Eko",
+    "last_name" => "Khannedy"
+];
+
+$b = [
+    "last_name" => "Khannedy",
+    "first_name" => "Eko"
+];
+
+var_dump($a == $b);
+var_dump($a === $b);
+
+Expression
+Expression adalah bagian terpenting di PHP
+Di PHP, hampir semua kode yang kita tulis adalah sebuah expression
+Secara sederhana, expression adalah apapun yang memiliki nilai atau value
+
+Contoh Expression Sederhana
+$a = 5; Ketika kita menuliskan “5”, maka tentu itu adalah nilai, oleh karena itu 5 tersebut adalah expression.
+Lalu kita menulis kode $b = $a; $a bisa kita bilang adalah expression, karena $a adalah nilai 5
+
+Contoh Expression Complex
+Pada kode dibawah, getValue() adalah expression, karena getValue() bernilai angka 100. Tentang function nanti kita akan bahas lebih detail di materi tersendiri
+
+Statement
+Statement bisa dibilang adalah kalimat lengkap dalam bahasa.
+Sebuah statement berisikan execution komplit, biasanya diakhiri dengan titik koma
+
+Block
+Block adalah kumpulan statement yang terdiri dari nol atau lebih statement.
+Block diawali dan diakhiri dengan kurung kurawal { }
+
+Manipulasi String
+
+Dot Operator
+Dot (titik) operator adalah operator yang bisa kita gunakan untuk menambahkan string dengan data lain (bisa string atau tipe data lainnya)
+Sebenarnya kita bisa menggunakan + (plus) untuk menambahkan string, namun jika kita coba tambahkan string dengan tipe data number, maka akan terjadi error. Oleh karena itu direkomendasikan menggunakan . (dot) untuk menambahkan string dengan data lain
+
+Kode : Dot Operator
+$name = "Eko Kurniawan Khannedy";
+
+echo "Name : " . $name . PHP_EOL;
+echo "Value : " . 100 . PHP_EOL;
+
+Konversi ke Number dan Sebaliknya
+Kadang kita sering melakukan konversi tipe data dari string ke number (int / float) atau sebaliknya
+Di PHP untuk melakukan konversi cukup mudah, kita hanya perlu menggunakan tanda kurung ( tipe data )
+Tipe data untuk string adalah string, untuk number bisa menggunakan int untuk integer dan float untuk floating point
+
+Konversi ke Number dan Sebaliknya
+$valueString = (string)100;
+var_dump($valueString);
+
+$valueInt = (int)"100";
+var_dump($valueInt);
+
+$valueFloat = (float)"1.01";
+var_dump($valueFloat);
+
+Mengakses Karakter
+String di PHP seperti array karakter, dimana kita bisa mengakses data tiap karakternya menggunakan kurung siku
+Sama seperti di array, index pertama dimulai dari 0
+Jika kita mengakses index melebihi karakter di string, maka akan terjadi error
+
+Kode : Mengakses Karakter
+$name = "Eko";
+echo $name[0] . PHP_EOL;
+echo $name[1] . PHP_EOL;
+echo $name[2] . PHP_EOL;
+
+Variable Parsing
+Khusus string menggunakan double quote atau heredoc, kita bisa menggunakan karakter $ untuk mengakses variable.
+Ini memudahkan ketika kita ingin menggabungkan string dengan variable.
+Cara penggunaanya adalah dengan menggunakan karakter $ lalu diikuti dengan nama variable nya.
+
+Kode : Variable Parsing
+echo "Hello " . $name . ", Selamat Belajar PHP" . PHP_EOL;
+echo "Hello $name, Selamat Belajar PHP" . PHP_EOL;
+
+Curly Brace
+Kadang kita butuh menggabungkan variable dengan string tanpa ada spasi. Hal ini akan menyulitkan jika hanya menggunakan variable parsing
+Untungnya di PHP kita bisa menambahkan kurung kurawal sebelum menggunakan variable parsing
+
+Kode : Curly Brace
+$var = "Eko";
+echo "This is {$var}s" . PHP_EOL;
+
+If Statement
+Dalam PHP, if adalah salah satu kata kunci yang digunakan untuk percabangan
+Percabangan artinya kita bisa mengeksekusi kode program tertentu ketika suatu kondisi terpenuhi
+Hampir di semua bahasa pemrograman mendukung if expression
+
+Else Statement
+Blok if akan dieksekusi ketika kondisi if bernilai true
+Kadang kita ingin melakukan eksekusi program tertentu jika kondisi if bernilai false
+Hal ini bisa dilakukan menggunakan else statement
+
+Else If Statement
+Kada dalam If, kita butuh membuat beberapa kondisi
+Kasus seperti ini, di PHP kita bisa menggunakan Else If statement
+Else if di PHP bisa lebih dari satu
+Kode Else if di php bisa menggunakan “else if” atau “elseif” (digabung)
+
+Kode : Else If Statement
+$nilai = 10;
+$absen = 90;
+
+if ($nilai >= 80 && $absen >= 80) {
+    echo "Nilai Anda A" . PHP_EOL;
+} else if ($nilai >= 70 && $absen >= 70) {
+    echo "Nilai Anda B" . PHP_EOL;
+} else if ($nilai >= 60 && $absen >= 60) {
+    echo "Nilai Anda C" . PHP_EOL;
+} else if ($nilai >= 50 && $absen >= 50) {
+    echo "Nilai Anda D" . PHP_EOL;
+} else {
+    echo "Nilai Anda E" . PHP_EOL;
+}
+
+Syntax Alternatif
+Selain menggunakan {} (kurung kurawal), PHP juga menyediakan syntax alternatif untuk menggunakan if, yaitu dengan menggunakan : (titik dua)
+Namun untuk menggunakan ini, kita harus menggunakan kata kunci endif diakhir if statement
+if ($nilai >= 80 && $absen >= 80) :
+    echo "Nilai Anda A" . PHP_EOL;
+elseif ($nilai >= 70 && $absen >= 70):
+    echo "Nilai Anda B" . PHP_EOL;
+elseif ($nilai >= 60 && $absen >= 60):
+    echo "Nilai Anda C" . PHP_EOL;
+elseif ($nilai >= 50 && $absen >= 50):
+    echo "Nilai Anda D" . PHP_EOL;
+else :
+    echo "Nilai Anda E" . PHP_EOL;
+endif;
+
+Switch Statement
+Kadang kita hanya butuh menggunakan kondisi sederhana di if statement, seperti hanya menggunakan perbandingan ==
+Switch adalah statement percabangan yang sama dengan if, namun  lebih sederhana cara pembuatannya
+Kondisi di switch statement hanya untuk perbandingan ==
+
+$nilai = "E";
+
+switch ($nilai){
+    case "A":
+        echo "Anda lulus dengan sangat baik" . PHP_EOL;
+        break;
+    case "B":
+    case "C":
+        echo "Anda lulus" . PHP_EOL;
+        break;
+    case "D":
+        echo "Anda tidak lulus" . PHP_EOL;
+        break;
+    default:
+        echo "Mungkin Anda salah jurusan" . PHP_EOL;
+}
+
+Syntax Alternatif
+Sama seperti if statement, switch statement juga bisa tanpa menggunakan {} (kurung kurawal)
+Namun diakhir switch statement, kita harus menambahkan kata kunci endswitch
+
+Kode : Switch Statement Syntax Alternatif
+switch ($nilai):
+    case "A":
+        echo "Anda lulus dengan sangat baik" . PHP_EOL;
+        break;
+    case "B":
+    case "C":
+        echo "Anda lulus" . PHP_EOL;
+        break;
+    case "D":
+        echo "Anda tidak lulus" . PHP_EOL;
+        break;
+    default:
+        echo "Mungkin Anda salah jurusan" . PHP_EOL;
+endswitch;
+
+Ternary Operator
+Kadang ada kasus kita butuh melakukan pengecekan kondisi menggunakan if statement, lalu jika benar kita ingin memberi nilai terhadap variable dengan nilai X dan jika salah dengan nilai Y
+Penggunaan if statement pada kasus seperti bisa dipersingkat menggunakan ternary operator
+Ternary operator menggunakan kata kunci ? dan :
+
+$gender = "PRIA";
+$hi = $gender == "PRIA" ? "Hi bro!" : "Hi nona!";
+
+echo $hi . PHP_EOL;
+
+Null Coalescing Operator
+Sebelumnya kita tahu bahwa data kosong direpresentasikan dengan data NULL di PHP
+Dan hal yang paling repot di PHP adalah mengecek apakah sebuah data ada atau tidak, dan juga apakah data tersebut isinya null atau bukan
+Biasanya untuk melakukan itu, kita perlu menggunakan pengecekan if statement dengan function isset($variable)
+Namun untungnya di php ada null coalescing operator menggunakan tanda ??
+
+Kode : Null Coalescing Operator 
+$data = [
+    "action" => "Create"
+];
+$action = $data["action"] ?? "Nothing";
+
+echo $action . PHP_EOL;
+
+For Loop
+For adalah salah satu kata kunci yang bisa digunakan untuk melakukan perulangan
+Blok kode yang terdapat di dalam for akan selalu diulangi selama kondisi for terpenuhi
+
+Sintak Perulangan For
+for(init statement; kondisi; post statement){
+   // block perulangan
+}
+Init statement akan dieksekusi hanya sekali di awal sebelum perulangan
+Kondisi akan dilakukan pengecekan dalam setiap perulangan, jika true perulangan akan dilakukan, jika false perulangan akan berhenti
+Post statement akan dieksekusi setiap kali diakhir perulangan
+Init statement, Kondisi dan Post Statement tidak wajib diisi, jika Kondisi tidak diisi, berarti kondisi selalu bernilai true
+
+for ($counter = 1; $counter <= 10; $counter++) {
+    echo "Ini adalah for loop ke-$counter" . PHP_EOL;
+}
+
+for ($counter = 10; $counter >= 1; $counter--) {
+    echo "Ini adalah for loop ke-$counter" . PHP_EOL;
+}
+
+for ($counter = 1; $counter <= 10; $counter++):
+    echo "Ini adalah for loop ke-$counter" . PHP_EOL;
+endfor;
+
+for ($counter = 10; $counter >= 1; $counter--):
+    echo "Ini adalah for loop ke-$counter" . PHP_EOL;
+endfor;
+
+While Loop
+While loop adalah versi perulangan yang lebih sederhana dibanding for loop
+Di while loop, hanya terdapat kondisi perulangan, tanpa ada init statement dan post statement 
+
+$counter = 1;
+while ($counter <= 10) {
+    echo "Ini adalah for while ke-$counter" . PHP_EOL;
+    $counter++;
+}
+
+$counter = 1;
+while ($counter <= 10) :
+    echo "Ini adalah for while ke-$counter" . PHP_EOL;
+    $counter++;
+endwhile;
+
+Do While Loop
+Do While loop adalah perulangan yang mirip dengan while
+Perbedaannya hanya pada pengecekan kondisi
+Pengecekan kondisi di while loop dilakukan di awal sebelum perulangan dilakukan, sedangkan di do while loop dilakukan setelah perulangan dilakukan
+Oleh karena itu dalam do while loop, minimal pasti sekali perulangan dilakukan walaupun kondisi tidak bernilai true
+
+Kode : Do While Loop
+$counter = 100;
+do {
+    echo "Ini adalah do while ke-$counter" . PHP_EOL;
+    $counter++;
+} while ($counter <= 10);
+
+Break & Continue
+Pada switch statement, kita sudah mengenal kata kunci break, yaitu untuk menghentikan case dalam switch
+Sama dengan pada perulangan, break juga digunakan untuk menghentikan seluruh perulangan.
+Namun berbeda dengan continue, continue digunakan untuk menghentikan perulangan saat ini, lalu melanjutkan ke perulangan selanjutnya
+
+Kode : Break
+$counter = 1;
+
+while (true) {
+    echo "Ini adalah for while ke-$counter" . PHP_EOL;
+    $counter++;
+
+    if ($counter > 10) {
+        break;
+    }
+}
+
+Kode : Continue
+for ($counter = 1; $counter <= 100; $counter++) {
+    if($counter % 2 == 0){
+        continue;
+    }
+    echo "Counter : $counter" . PHP_EOL;
+}
+
+For Each
+Kadang kita biasa mengakses data array menggunakann perulangan
+Mengakses data array menggunakan perulangan sangat bertele-tele, kita harus membuat counter, lalu mengakses array menggunakan counter yang kita buat
+Namun untungnya, di PHP terdapat perulangan for each, yang bisa digunakan untuk mengakses seluruh data di Array secara otomatis
+
+
 
 
 
