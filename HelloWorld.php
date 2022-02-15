@@ -217,4 +217,129 @@ var_dump($values);
 
 $names = ["Eko", "Kurniawan", "Khannedy"];
 var_dump($names);
+
+Operasi Array
+ Operasi
+Keterangan
+$array[index]
+Mengakses data di array pada nomor index
+$array[index] = value
+Mengubah data di array pada nomor index dengan value baru
+$array[] = value
+Menambah data di array pada posisi paling belakang
+unset($array[index])
+Menghapus data di array, index otomatis hilang dari array
+count($array)
+Mengambil total data di array
+
+Kode : Operasi Array
+var_dump($names[0]);
+
+$names[0] = "Budi";
+var_dump($names);
+
+unset($names[1]);
+var_dump($names);
+
+$names[] = "Joko";
+var_dump($names);
+
+var_dump(count($names));
+
+Array Sebagai Map
+Biasanya di kebanyakan bahasa pemrograman, terdapat tipe data bernama Map, yaitu asosiasi antara key dan value
+Namun di PHP, Map bisa dibuat menggunakan Array
+Secara default Array akan menggunakan index (number) sebagai key dan value nya kita bisa bebas memasukkan data ke dalam Array
+Namun jika kita ingin, kita juga bisa mengubah index nya tidak harus menggunakan number, bisa gunakan tipe data lain, seperti string misal nya
+Hal tersebut terlihat seperti Map di bahasa pemrograman lain
+
+Kode : Membuat Map
+$eko = array(
+    "id" => "eko",
+    "name" => "Eko Kurniawan",
+    "age" => 30,
+    "address" => array(
+        "city" => "Jakarta",
+        "country" => "Indonesia"
+    )
+);
+var_dump($eko);
+
+var_dump($eko["name"]);
+var_dump($eko["address"]["country"]);
+
+Array di dalam Array
+Seperti dijelaskan di awal, Array di PHP bisa berisikan data apapun
+Sehingga kita juga bisa membuat array di dalam array jika memang dibutuhkan
+
+$budi = [
+    "id" => "budi",
+    "name" => "Budi Nugraha",
+    "age" => 35,
+    "address" => [
+        "city" => "Jakarta",
+        "country" => "Indonesia"
+    ]
+];
+var_dump($budi);
+
+Operator Aritmatika (1)
+Operator
+Keterangan
++$variable
+Positif
+-$variable
+Negatif
+$variable + $variable
+Penambahan
+$variable - $variable
+Pengurangan
+$variable * $variable
+Perkalian
+$variable / $variable
+Pembagian
+$variable % $variable
+Sisa bagi
+$variable ** $variable
+Pangkat
+
+Kode : Operator Aritmatika
+$a = 10;
+$b = 10;
+
+$result = $a + $b;
+var_dump($result);
+
+$resultNegative = -$result;
+var_dump($resultNegative);
+
+$resultPositive = +$result;
+var_dump($resultPositive);
+
+$resultModulo = 100 % 3;
+var_dump($resultModulo);
+
+Operator Penugasan
+Operator penugasan di PHP sama seperti bahasa pemrograman lain, yaitu dengan menggunakan karakter = (sama dengan)
+Operator penugasan sudah sering kita gunakan, terutama ketika mengubah value sebuah variable
+Namun selain hal itu, operasi penugasan juga bisa digunakan untuk operasi aritmatika
+
+Operator Penugasan Aritmatika
+Penugasan
+Keterangan
+$a += $b
+$a = $a + b
+$a -= $b
+$a = $a - b
+$a *= $b
+$a = $a * b
+$a /= $b
+$a = $a / b
+$a %= $b
+$a = $a % b
+
+Kode : Operator Penugasan Aritmatika
+
+
+
 */
