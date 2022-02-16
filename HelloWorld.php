@@ -822,6 +822,262 @@ foreach ($person as $key => $value) {
     echo "$key : $value" . PHP_EOL;
 }
 
+goto Operator
+Salah satu fitur yang sebenarnya jarang sekali digunakan di PHP adalah goto operator
+Kenapa jarang digunakan karena jika terlalu banyak menggunakan goto operator, kode program aplikasinya akan mudah membingungkan yang membaca kode nya
+goto adalah fitur dimana kita bisa loncat ke kode program sesuai dengan keinginan kita
+Agar goto bisa loncat ke kode program, kita harus membuat label di php dengan menggunakan nama label lalu diakhiri : (colon)
+
+Kode : goto Operator
+goto a;
+echo "Hello World" . PHP_EOL;
+
+a:
+echo "Hello A" . PHP_EOL;
+
+Kode : goto Operator di Loop
+$counter = 1;
+
+while (true) {
+    echo "Ini adalah for while ke-$counter" . PHP_EOL;
+    $counter++;
+
+    if ($counter > 10) {
+        goto end;
+    }
+}
+
+end:
+echo "End Loop";
+
+Function
+Function adalah block kode program yang akan berjalan saat kita panggil
+Sebelumnya kita sudah menggunakan function isset(), count() dan lain-lain.
+Untuk membuat function di PHP, kita bisa menggunakan kata kunci function, lalu diikuti dengan nama function, kurung () dan diakhiri dengan block 
+Kita bisa memanggil function dengan menggunakan nama function lalu diikuti dengan kurung ()
+Di bahasa pemrograman lain, function juga disebut dengan method
+
+Kode : Function
+Kode : Lokasi Function
+$buat = true;
+
+if ($buat) {
+    function sayHello()
+    {
+        echo "Hello Function" . PHP_EOL;
+    }
+}
+
+sayHello();
+sayHello();
+sayHello();
+sayHello();
+sayHello();
+
+Function Argument
+Kita bisa mengirim informasi ke function yang ingin kita panggil
+Untuk melakukan hal tersebut, kita perlu menambahkan argument atau parameter di function yang sudah kita buat
+Cara membuat argument sama seperti cara membuat variabel
+Argument ditempatkan di dalam kurung () di deklarasi function
+Argument bisa lebih dari satu, jika lebih dari satu, harus dipisah menggunakan tanda koma
+
+Kode : Function Argument
+Kode : Default Argument Value
+Default Argument Value
+PHP mendukung default argument value
+Fitur ini memungkinkan jika ketika kita memanggil function tidak memasukkan parameter, kita bisa menentukan data default nya apa
+
+function sayHello($firstName, $lastName = "")
+{
+    echo "Hello $firstName $lastName" . PHP_EOL;
+}
+
+sayHello("Eko");
+sayHello("Budi");
+sayHello("Eko", "Kurniawan");
+
+Kesalahan Default Argument Value
+Default argument value bisa disimpan argument manapun
+Namun jika argument lebih dari satu, dan kita menyimpan default argument value di parameter awal, maka itu kurang berguna
+
+Type Declaration
+Sama seperti variable, argument di PHP bisa kita masukkan data yang dinamis
+Kadang terlalu dinamis juga menyulitkan jika ternyata kita hanya ingin membuat function yang menggunakan argument dengan tipe data tertentu
+Untungnya di PHP, kita bisa menambahkan type data di argument, sehingga PHP akan melakukan pengecekan ketika kita mengirim value ke function tersebut
+Jika tipe data value tidak sesuai, maka akan terjadi error
+Secara default PHP akan melakukan percobaan konversi tipe data secara otomatis, misal jika kita menggunakan tipe int, tapi kita mengirim string, maka PHP akan otomatis mengkonversi string tersebut menjadi int
+
+Valid Types (1)
+ Type
+Keterangan
+Class / Interface
+Parameter harus tipe Class / Interface
+self
+Parameter harus sama dengan Class dimana function ini dibuat
+array
+Parameter harus array
+callable
+Parameter harus callable
+bool
+Parameter harus boolean 
+float
+Parameter harus floating point
+ int
+Parameter harus integer number
+string
+Parameter harus string
+interable
+Parameter harus array atau tipe Traversable
+object
+Parameter harus sebuah object
+
+Kode : Type Declaration
+function sum(int $first, int $last)
+{
+    $total = $first + $last;
+    echo "Total $first + $last = $total" . PHP_EOL;
+}
+
+sum(100, 100);
+sum("100", "100");
+sum(true, false);
+
+Variable-length Argument List
+Variable-length argument list merupakan kemampuan dimana kita bisa membuat sebuah parameter yang menerima banyak value
+Variable-length argument list secara otomatis akan membuat argument tersebut menjadi array, namun kita tidak perlu manual mengirim array ke functionnya
+Variable-length argument list hanya bisa dilakukan di argument posisi terakhir
+Untuk membuat variable-length argument list, kita bisa menggunakan tanda … (titik tiga kali) sebelum nama argument
+
+Kode : Variable-length Argument List
+function sumAll(...$values)
+{
+    $total = 0;
+    foreach ($values as $value) {
+        $total += $value;
+    }
+    echo "Total " . implode(",", $values) . " = $total" . PHP_EOL;
+}
+
+$values = [1, 2, 3, 4, 5];
+
+sumAll(1, 2, 3, 4, 5);
+sumAll(...$values);
+
+Function Return Value
+Secara default, function itu tidak menghasilkan value apapun, namun jika kita ingin, kita bisa membuat sebuah function mengembalikan nilai
+Dan di dalam block function, untuk menghasilkan nilai tersebut, kita harus menggunakan kata kunci return, lalu diikuti dengan data yang ingin dihasilkan
+Kita hanya bisa menghasilkan 1 data di sebuah function, tidak bisa lebih dari satu
+
+Kode : Function Return Value (1)
+function sum(int $first, int $second): int
+{
+    $total = $first + $second;
+    return $total;
+}
+
+$result = sum(10, 10);
+var_dump($result);
+
+$result = sum(100, 100);
+var_dump($result);
+
+Kode : Function Return Value (2)
+
+Return Type Declarations
+Sama seperti pada argument, pada return value pun kita bisa mendeklarasikan tipe datanya
+Hal ini selain mempermudah kita ketika membaca tipe data kembalian function, bisa juga digunakan untuk menjaga jangan sampai kita mengembalikan tipe data yang salah di function
+Untuk mendeklarasikan tipe data kembalian function, setelah kurung () kita bisa tambahkan : diikuti tipe data kembaliannya
+
+function getFinalValue(int $value): string
+{
+    if ($value >= 80) {
+        return "A";
+    } else if ($value >= 70) {
+        return "B";
+    } else if ($value >= 60) {
+        return "C";
+    } else if ($value >= 50) {
+        return "D";
+    } else {
+        return "E";
+    }
+
+    echo "Ups" . PHP_EOL;
+}
+
+$score = getFinalValue(90);
+var_dump($score);
+
+$score = getFinalValue(30);
+var_dump($score);
+
+Variable Function
+PHP mendukung konsep yang bernama variable function
+Variable function adalah kemampuan memanggil sebuah function dari value yang terdapat di sebuah variable
+Untuk menggunakan variable function, kita bisa secara langsung memanggil $namaVariable(), jika ingin menambahkan argument, kita bisa menggunakan $namaVariable(argument)
+
+Kode : Variable Function
+function foo()
+{
+    echo "Foo" . PHP_EOL;
+}
+
+function bar()
+{
+    echo "Bar" . PHP_EOL;
+}
+
+$functionYangAkanDipanggil = "foo";
+$functionYangAkanDipanggil();
+
+$functionYangAkanDipanggil = "bar";
+$functionYangAkanDipanggil();
+
+Kode : Penggunaan Variable Function
+function sayHello(string $name, $filter)
+{
+    $finalName = $filter($name);
+    echo "Hello $finalName" . PHP_EOL;
+}
+
+function sampleFunction(string $name): string {
+    return "Sample $name";
+}
+
+sayHello("Eko", "sampleFunction");
+sayHello("Eko", "strtoupper");
+sayHello("Eko", "strtolower");
+
+Anonymous Function
+Anonymous function adalah function tanpa nama, di PHP disebut juga dengan Closure
+Anonymous function biasanya digunakan sebagai argument atau sebagai value di variable
+Anonymous function membuat kita bisa mengirim function sebagai argument di function lainnya
+
+Kode : Anonymous Function
+$sayHello = function (string $name) {
+    echo "Hello $name" . PHP_EOL;
+};
+
+$sayHello("Eko");
+$sayHello("Budi");
+
+Kode : Anonymous Function Sebagai Argument
+function sayGoodBye(string $name, $filter)
+{
+    $finalName = $filter($name);
+    echo "Good bye $finalName" . PHP_EOL;
+}
+
+sayGoodBye("Eko", function (string $name): string {
+    return strtoupper($name);
+});
+
+Mengakses Variable di Luar Closure
+Secara default, anonymous function tidak bisa mengakses variabel yang terdapat diluar function
+Jika kita ingin menggunakan variable yang terdapat diluar anonymous function, kita perlu secara explicit menyebutkannya menggunakan kata kunci use lalu diikuti variable-variable yang ingin kita gunakan
+
+
+
 
 
 
