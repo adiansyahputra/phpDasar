@@ -1072,9 +1072,404 @@ sayGoodBye("Eko", function (string $name): string {
     return strtoupper($name);
 });
 
+$filterFunction = function (string $name): string {
+    return strtoupper($name);
+};
+sayGoodBye("Eko", $filterFunction);
+
 Mengakses Variable di Luar Closure
 Secara default, anonymous function tidak bisa mengakses variabel yang terdapat diluar function
 Jika kita ingin menggunakan variable yang terdapat diluar anonymous function, kita perlu secara explicit menyebutkannya menggunakan kata kunci use lalu diikuti variable-variable yang ingin kita gunakan
+
+$firstName = "Eko";
+$lastName = "Kurniawan";
+
+$sayHelloEko = function () use ($firstName, $lastName) {
+    echo "Hello $firstName $lastName" . PHP_EOL;
+};
+$sayHelloEko();
+
+$firstName = "Budi";
+$lastName = "Nugraha";
+$sayHelloEko();
+
+Arrow Function
+Arrow function diperkenalkan di PHP 7.4 sebagai alternative anonymous function yang lebih sederhana pembuatannya
+Secara garis besar, sebenarnya arrow function dan anonymous function adalah dua hal yang sama
+Hal yang membedakan di arrow function adalah, secara otomatis variable diluar closure bisa digunakan, tidak seperti di anonymous function yang harus disebutkan secara manual menggunakan kata kunci use
+Pembuatan arrow function tidak menggunakan kata kunci function, melainkan fn
+Arrow function di khususnya untuk pembuatan function yang sederhana
+
+Kode : Arrow Function
+$firstName = "Eko";
+$lastName = "Kurniawan";
+
+$anonymousFunction = function () use ($firstName, $lastName) : string {
+    return "Hello $firstName $lastName" . PHP_EOL;
+};
+
+$arrowFunction = fn() => "Hello $firstName $lastName" . PHP_EOL;
+
+echo $anonymousFunction();
+echo $arrowFunction();
+
+Callback Function
+Callback adalah sebuah mekanisme sebuah function memanggil function lainnya sesuai dengan yang diberikan di argument
+Hal ini sebenarnya sudah kita lakukan di materi Variable Function dan Anonymous Function
+Namun di PHP ada cara lain untuk implementasi callback, yaitu menggunakan tipe data callable
+Dan untuk memanggil callback function tersebut, kita bisa menggunakan function call_user_func(callable, arguments)
+
+Kode : Callback Function
+function sayHello(string $name, callable $filter)
+{
+    $finalName = call_user_func($filter, $name);
+    echo "Hello $finalName" . PHP_EOL;
+}
+
+sayHello("Eko", "strtoupper");
+sayHello("Eko", "strtolower");
+sayHello("Eko", function (string $name): string {
+    return strtoupper($name);
+});
+sayHello("Eko", fn($name) => strtoupper($name));
+
+Recursive Function
+Recursive function adalah kemampuan function memanggil function dirinya sendiri
+Kadang memang ada banyak problem, yang lebih mudah diselesaikan menggunakan recursive function, seperti contohnya kasus factorial
+
+Kode : Factorial Loop
+function factorialLoop(int $value): int
+{
+    $total = 1;
+
+    for ($i = 1; $i <= $value; $i++) {
+        $total *= $i;
+    }
+
+    return $total;
+}
+
+var_dump(factorialLoop(5));
+var_dump(1 * 2 * 3 * 4 * 5);
+
+Kode : Factorial Recursive
+function factorialRecursive(int $value): int
+{
+    if ($value == 1) {
+        return 1;
+    } else {
+        return $value * factorialRecursive($value - 1);
+    }
+}
+
+var_dump(factorialRecursive(5));
+
+Problem Dengan Recursive
+Walaupun recursive function itu sangat menarik, namun kita perlu berhati-hati
+Jika recursive terlalu dalam, maka  akan ada kemungkinan  terjadi memory overflow, yaitu error dimana memory terlalu banyak digunakan di PHP
+Kenapa problem ini  bisa terjadi? Karena ketika kita memanggil function, PHP akan menyimpannya dalam stack, jika function tersebut memanggil function lain, maka stack akan menumpuk terus, dan jika terlalu banyak, maka akan membutuhkan konsumsi memory besar, jika sudah melewati batas, maka akan terjadi error memory
+
+Kode : Error StackOverflow
+function loop(int $value)
+{
+    if ($value == 0) {
+        echo "End loop" . PHP_EOL;
+    } else {
+        echo "Loop-$value" . PHP_EOL;
+        loop($value - 1);
+    }
+}
+
+loop(3000000);
+
+Komentar
+Kadang dalam membuat program, kita sering menempatkan komentar di kode program tersebut
+Komentar adalah kode program yang akan di hiraukan saat kode program kita dijalankan
+Biasanya komentar digunakan untuk dokumentasi
+
+String Function
+Sebelumnya saya pernah menggunakan beberapa function bawaan dari PHP untuk memanipulasi data string.
+Sebenarnya banyak sekali function bawaan PHP yang bisa kita gunakan untuk memanipulasi string
+https://www.php.net/manual/en/ref.strings.php 
+
+Contoh String Function
+ Function
+Keterangan
+join() / implode()
+Menggabungkan array menjadi string
+explode()
+Memecah string menjadi array
+strtolower() 
+Mengubah string menjadi lowercase
+strtoupper()
+Mengubah string menjadi uppercase
+substr()
+Mengambil sebagian string
+trim()
+Menghapus whitespace di depan dan belakang string
+
+Kode : String Function
+var_dump(join(",", [10, 11, 12, 13, 14, 15]));
+var_dump(explode(" ", "Eko Kurniawan Khanendy"));
+var_dump(strtolower("EKO KURNIAWNA KHANNEDY"));
+var_dump(strtoupper("eko kurniawna khannedy"));
+var_dump(trim("        eko      kurniawan       "));
+var_dump(substr("Eko Kurniawan Khannedy", 0, 3));
+
+Array Function
+Di PHP juga terdapat banyak sekali function bawaan yang bisa kita gunakan untuk memanipulasi data Array
+https://www.php.net/manual/en/ref.array.php 
+
+Contoh Array Function
+ Function
+Keterangan
+array_keys()
+Mengambil semua keys milik array
+array_values()
+Mengambil semua values milik array
+array_map()
+Mengubah semua data array dengan callback
+sort()
+Mengurutkan array
+rsort()
+Mengurutkan array terbalik
+shuffle()
+Mengubah posisi data di array secara random
+
+Kode : Array Function
+$data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+$dataResult = array_map(fn(int $value) => $value * 10, $data);
+var_dump($dataResult);
+
+rsort($data);
+var_dump($data);
+
+var_dump(array_keys($data));
+var_dump(array_values($data));
+
+$person = [
+    "first_name" => "Eko",
+    "last_name" => "Khannedy"
+];
+var_dump(array_keys($person));
+var_dump(array_values($person));
+
+is Function
+PHP memiliki banyak sekali function dengan prefix is_
+Function-function ini rata-rata digunakan untuk mengecek tipe data dari sebuah data
+https://www.php.net/manual/en/ref.var.php 
+
+Contoh Is Function
+ Function
+Keterangan
+is_string()
+Apakah tipe data string
+is_bool()
+Apakah tipe data boolean
+is_int()
+Apakah tipe data number integer
+is_float()
+Apakah tipe data number floating point
+is_array()
+Apakah tipe data array
+is_callable()
+Apakah tipe data callable
+
+Kode : Is Function
+$data = "Eko";
+
+var_dump(is_string($data));
+var_dump(is_bool($data));
+var_dump(is_int($data));
+var_dump(is_float($data));
+var_dump(is_array($data));
+var_dump(is_null($data));
+
+Require dan Include
+Saat membuat aplikasi, ada baiknya tidak dibuat dalam satu file
+Lebih baik dipisah ke beberapa file agar kode program tidak terlalu bertumpuk di satu file
+PHP memiliki function require dan include yang bisa kita gunakan untuk mengambil file php lain
+Lantas apa bedanya require dan include?
+Pada require, jika file yang kita ambil tidak ada, maka akan terjadi error dan program terhenti
+Pada include, jika file yang kita ambil tidak ada, maka hanya akan memberi peringatan, namun program akan tetap dilanjutkan
+
+Kode : File MyFunction.php
+Lib/MyFunction.php
+function sayHello(string $firstName, string $lastName): string
+{
+    return "Hello $firstName $lastName";
+}
+
+Kode : Include 
+include "Lib/MyFunction.php";
+
+echo sayHello("Eko", "Kurniawan");
+
+Posisi Require dan Include
+Kode program PHP akan dibaca dari atas ke bawah, oleh karena itu pastikan posisi require dan include sesuai dengan yang kita inginkan
+Misal jika sampai kita salah menempatkan posisi require dan include, bisa jadi kita malah memanggil function yang belum ada 
+
+require_once dan include_once
+Function require dan include akan selalu mengambil file yang kita inginkan
+Jika kita beberapa kali menggunakan require dan include file yang sama, maka file tersebut akan berkali-kali pula kita ambil
+Hal ini akan menjadi masalah jika misal dalam file yang kita ambil terdapat definisi function , sehingga jika diambil berkali-kali akan menyebabkan error redeclare function
+Untungnya di PHP terdapat function require_once dan include_once, function ini bisa mendeteksi jika kita sebelumnya pernah mengambil file yang sama, maka tidak akan diambil lagi
+
+Kode : include_once
+include_once "Lib/MyFunction.php";
+include_once "Lib/MyFunction.php";
+
+echo sayHello("Eko", "Kurniawan");
+
+Variable Scope
+Di PHP, kita bisa membuat variable dimanapun yang kita mau
+Scope variable adalah dibagian mana saja sebuah variable bisa diakses
+PHP memiliki tiga jenis variable scope
+global
+local
+static
+
+Global Scope
+Variable yang dibuat diluar function memiliki scope global
+Variable di scope global hanya bisa diakses dari luar function
+Artinya di dalam function, kita tidak bisa mengakses variable di global scope
+
+Kode : Variable Global Scope
+$name = "Eko"; // global scope
+
+function sayHello()
+{
+    global $name; // global keyword
+    echo $name . PHP_EOL;
+
+    echo $GLOBALS["name"] . PHP_EOL;
+}
+
+sayHello();
+
+Local Scope
+Variable yang dibuat di dalam function memiliki scope local
+Variable di scope local hanya bisa diakses dari dalam function itu sendiri
+Artinya variable tersebut tidak bisa diakses dari luar function ataupun dari function lain
+
+Kode : Variable Local Scope
+function createName()
+{
+    $name = "Eko"; // local scope
+}
+
+createName();
+echo $name . PHP_EOL;
+
+global Keyword
+Namun jika kita ingin mengakses variable diluar function (global scope) dari dalam function, kita bisa menggunakan kata kunci global
+Dengan menggunakan kata kunci global, maka kita bisa mengakses variable yang ada di global scope dari dalam function
+
+Kode : global Keyword
+$name = "Eko"; // global scope
+
+function sayHello()
+{
+    global $name; // global keyword
+    echo $name . PHP_EOL;
+
+    echo $GLOBALS["name"] . PHP_EOL;
+}
+
+sayHello();
+
+$GLOBAL Variable
+Selain menggunakan global keyword, setiap variable yang dibuat di global scope, secara otomatis akan disimpan di dalam array $GLOBAL oleh PHP
+Jadi kita bisa menggunakan $GLOBAL variable dengan key nama variable nya dari dalam function jika ingin mengakses global variable
+$GLOBAL adalah variable yang bersifat superglobal, artinya bisa diakses dari scope manapun
+
+Kode : $GLOBAL Variable
+$name = "Eko"; // global scope
+
+function sayHello()
+{
+    global $name; // global keyword
+    echo $name . PHP_EOL;
+
+    echo $GLOBALS["name"] . PHP_EOL;
+}
+
+sayHello();
+
+Static Scope
+Secara default local variable itu siklus hidupnya hanya sebatas function nya dieksekusi
+Jika sebuah function selesai dieksekusi, maka siklus hidup local variable nya selesai
+PHP memiliki scope yang bernama static
+Static scope hanya bisa di set ke local variable
+Saat kita membuat sebuah local variable menjadi static, maka siklus hidupnya tidak akan berhenti ketika sebuah function selesai dieksekusi
+Artinya jika function tersebut dieksekusi lagi, maka static variable tersebut akan memiliki value dari sebelumnya
+
+Kode : Static Scope
+function increment()
+{
+    static $counter = 1; // static scope
+    echo "Counter = $counter" . PHP_EOL;
+    $counter++;
+}
+
+
+increment();
+increment();
+increment();
+increment();
+increment();
+increment();
+
+Apa itu Reference?
+Reference adalah mengakses variable yang sama dengan nama variable yang berbeda
+Reference di PHP tidak sama dengan reference di bahasa pemrograman seperti C / C++ yang memiliki fitur pointer
+Analogi Reference itu seperti file, jika variable adalah file, dan value nya adalah isi file nya, maka reference adalah membuat shortcut (di Windows) atau alias (di Linux / Mac) terhadap file yang sama
+Saat kita mengubah isi value dari reference, maka secara otomatis value variable aslinya pun berubah
+Untuk membuat reference terhadap variable, kita bisa menggunakan karakter & 
+
+Assign By Reference 
+Pertama, PHP Reference bisa memungkinkan kita bisa membuat beberapa variable menuju ke value yang sama
+
+Kode : Assign By Reference 
+$name = "Eko";
+
+$otherName = &$name;
+
+$otherName = "Budi";
+
+echo $name . PHP_EOL;
+
+Pass By Reference 
+Selanjutnya yang bisa dilakukan di PHP adalah, mengirim data ke function dengan reference
+
+Kode : Pass By Reference 
+function increment(int &$value)
+{
+    $value++;
+}
+
+$counter = 1;
+increment($counter);
+
+echo $counter . PHP_EOL;
+
+Returning References
+PHP juga bisa mengembalikan reference pada function
+Namun hati-hati, gunakan fitur ini jika memang ada alasannya, karena fitur ini bisa membingungkan
+
+Kode : Returning References
+function &getValue()
+{
+    static $value = 100;
+    return $value;
+}
+
+$a = &getValue();
+$a = 200;
+
+$b = &getValue();
+echo $b . PHP_EOL;
 
 
 
